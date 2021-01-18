@@ -125,4 +125,6 @@ dmypy.json
 .pyre/
 
 # Others
-email_credentials.yaml
+settings.yaml
+imgs
+.DS_Store
