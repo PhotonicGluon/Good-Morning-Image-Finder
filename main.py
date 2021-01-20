@@ -2,7 +2,7 @@
 main.py
 
 Created on 2021-01-18
-Updated on 2021-01-18
+Updated on 2021-01-20
 
 Copyright © Ryan Kan
 
@@ -22,16 +22,17 @@ from src.scraper import search_images_on_google
 from src.settings_reader import get_settings
 
 # CONSTANTS
-SEARCH_TERM = "Good Morning"
-NUM_IMAGES = 100
-NUM_IMAGES_TO_SEND = 5
+SEARCH_TERM = "Good Morning"  # What should be searched on Google Images?
+NUM_IMAGES = 100  # Maximum number of images to scrape off Google Images
+NUM_IMAGES_TO_SEND = 5  # Number of images to send per email
 
 SETTINGS_FILE = "settings.yaml"
-IMAGES_DIR = "imgs"
+IMAGES_DIR = "imgs"  # Where the images will be stored
 
-CHECK_IMAGE_HOUR = 7  # In 24 h notation
-SEND_EMAIL_HOUR = 8  # In 24 h notation
+CHECK_IMAGE_HOUR = 7  # In 24 hour notation (e.g. 8 for 8 am, 12 for 12 pm, 13 for 1 pm, 0 for 12 am)
+SEND_EMAIL_HOUR = 8  # In 24 hour notation
 
+# This is what the email's text portion will be
 EMAIL_BODY = """Hello!
 
 Attached to this email you can find today's "Good Morning" images.
@@ -90,6 +91,4 @@ print("Starting script.")
 scheduler = BlockingScheduler()
 scheduler.add_job(check_available_images, "cron", hour=CHECK_IMAGE_HOUR)
 scheduler.add_job(send_good_morning_email, "cron", hour=SEND_EMAIL_HOUR)
-# scheduler.add_job(check_available_images, "cron", second=0)
-# scheduler.add_job(send_good_morning_email, "cron", second=30)
 scheduler.start()
